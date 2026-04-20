@@ -19,7 +19,7 @@ struct ProductClassifierService {
 
   // Umbral mínimo de confianza. Debajo de esto → "otro"
   // Ajústalo si después de probar ves falsos positivos o falsos negativos.
-  private let confidenceThreshold: Float = 0.65
+  private let confidenceThreshold: Float = 0.7
 
   /// Mapa de nombre-de-carpeta → categoría Tlane que muestra la UI.
   /// Cambia estos según los nombres reales de tus carpetas en Create ML.

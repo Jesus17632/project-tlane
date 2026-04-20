@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 import FoundationModels
 import Speech
 import AVFoundation
@@ -132,11 +133,13 @@ final class ConsejeroViewModel {
     }()
 
     @MainActor
-    func loadAdvice() async {
-        let weekday   = Calendar.current.component(.weekday, from: .now)
-        let isWeekend = weekday == 1 || weekday == 7
-        let hour      = Calendar.current.component(.hour, from: .now)
-        await ask("Hoy es \(isWeekend ? "fin de semana" : "día entre semana"), son las \(hour):00 hrs. Dame un consejo de ventas práctico para hoy.")
+    func loadAdvice(context: ModelContext) async {
+        let summary = AppContextBuilder.build(context: context)
+        await ask("""
+        Analiza estos datos del negocio y dame un consejo práctico para hoy: 
+        \(summary)
+        Prioriza alertas de stock, tendencias negativas o acciones concretas para ahora.
+        """)
     }
 
     @MainActor
@@ -213,6 +216,7 @@ final class ConsejeroViewModel {
 
 struct FallbackConsejeroCardView: View {
     @State private var vm = ConsejeroViewModel()
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         VStack(spacing: 12) {
@@ -227,7 +231,7 @@ struct FallbackConsejeroCardView: View {
         }
         .task {
             await vm.voice.requestPermissions()
-            await vm.loadAdvice()
+            await vm.loadAdvice(context: modelContext)
         }
         .onChange(of: vm.voice.isRecording) { _, recording in
             if !recording {
