@@ -111,7 +111,6 @@ struct HomeView: View {
                         .font(.title2)
                         .foregroundStyle(oscuro)
                         .padding(8)
-                        .glassEffect(in: Circle())
                 }
             }
         }

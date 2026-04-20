@@ -78,7 +78,7 @@ struct CajaGrandeView: View {
                     .padding(.bottom, 32)
                 }
             }
-            .navigationTitle("Caja Grande")
+            .navigationTitle("Bienvenido")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

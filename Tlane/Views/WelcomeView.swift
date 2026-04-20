@@ -85,7 +85,7 @@ struct WelcomeView: View {
 
             VStack(alignment: .leading, spacing: 16) {
                 feature(icono: "camera.fill",
-                        titulo: "Escanea tus piezas",
+                        titulo: "Escanea tus productos",
                         descripcion: "Identifica artesanías con la cámara.")
                 feature(icono: "arrow.down.circle.fill",
                         titulo: "Cobra con un toque",
